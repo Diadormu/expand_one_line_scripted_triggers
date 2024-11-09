@@ -2,6 +2,7 @@
 import os
 import csv
 from pathlib import Path
+import re
 
 dir_in = "X:\\xxx\\steamapps\\common\\Stellaris" #Stellaris' path
 dir_out = "X:\\Users\\xxx\\Documents\\Paradox Interactive\\Stellaris\\mod\\xxx" #output path
@@ -25,7 +26,8 @@ for i in p_txt_paths:
                 tmpline = oldline
                 for key,value in mapping.items():
                     if key in tmpline:
-                        tmpline = tmpline.replace(key, value)
+                        #tmpline = tmpline.replace(key, value)
+                        tmpline = re.sub(rf'\b{key}\b', value, tmpline)
                         expanded = 1
                 newline.append(tmpline)
         if expanded:
